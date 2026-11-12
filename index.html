@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffe8f1">
+<title>A Little Birthday Magic for Jagriti</title>
+<style>
+:root{--pink:#f28bb8;--rose:#bd6491;--ink:#633b55;--soft:#fff8fc}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(circle at 20% 10%,#fff 0,#ffeaf3 40%,#f1e5ff 100%);overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+section{min-height:100svh;display:grid;place-items:center;padding:30px 0;position:relative}
+.hidden{display:none!important}
+.panel{width:min(790px,93vw);padding:clamp(22px,5vw,48px);border:1px solid #fff;border-radius:30px;background:#ffffffc9;box-shadow:0 24px 80px #9d5b8229;backdrop-filter:blur(12px);text-align:center;position:relative;overflow:hidden}
+.eyebrow{font:600 11px/1.4 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#b46b91}
+h1,h2{font-weight:500;margin:.25em 0 .4em;line-height:1.08}
+h1{font-size:clamp(43px,8vw,78px);color:#a84f7b}
+h2{font-size:clamp(30px,6vw,49px);color:#a84f7b}
+p{font-size:clamp(16px,2.4vw,19px);line-height:1.7}
+.script{font-style:italic;color:#bd6490}
+.small{font:12px/1.6 Arial,sans-serif;color:#956b83}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 24px;border-radius:999px;background:linear-gradient(135deg,#f28bb8,#bd72ae);color:white;font:600 14px Arial,sans-serif;letter-spacing:.02em;box-shadow:0 10px 25px #d779a84a;transition:.2s;border:0}
+.btn:hover{transform:translateY(-2px);filter:saturate(1.12)}
+.btn:disabled{opacity:.65;cursor:wait;transform:none}
+.divider{width:90px;height:1px;background:linear-gradient(90deg,transparent,#d88db1,transparent);margin:22px auto}
+.hero{background:linear-gradient(140deg,#fff8fbdd,#ffe4f0bb),radial-gradient(circle at 50% 35%,#fff 0,#fbd4e5 55%,#e9d5f5 100%)}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.6}
+.hero:before{width:260px;height:260px;background:#ffd0e2;top:8%;left:-90px}
+.hero:after{width:220px;height:220px;background:#e8c9f5;bottom:3%;right:-80px}
+.hero .panel{z-index:1}
+.sparkle{font-size:30px;letter-spacing:12px;color:#e5a6c5}
+.cake-area{margin:24px auto 8px;width:min(390px,82vw);height:285px;position:relative;display:flex;align-items:end;justify-content:center}
+.cake{position:relative;width:270px;height:145px;transition:.6s}
+.plate{position:absolute;bottom:0;left:-24px;width:318px;height:20px;border-radius:50%;background:linear-gradient(#fff,#e9c8d9);box-shadow:0 8px 15px #a75d8230}
+.tier{position:absolute;bottom:16px;left:0;width:270px;height:105px;border-radius:18px 18px 24px 24px;background:linear-gradient(90deg,#e98bb2,#ffe2ee 25%,#f7b7d0 72%,#d977a5);box-shadow:inset 0 -12px 0 #d76e9d}
+.tier:before{content:"";position:absolute;top:-13px;left:0;width:100%;height:29px;border-radius:50%;background:linear-gradient(#fff7fb,#ffdce9);box-shadow:0 4px 0 #e99bb9}
+.frost{position:absolute;top:12px;left:30px;width:210px;height:13px;border-radius:50%;background:#fff7fb;opacity:.85}
+.berries{position:absolute;top:34px;left:0;width:100%;text-align:center;font-size:24px;letter-spacing:8px}
+.candle-row{position:absolute;bottom:145px;left:50%;transform:translateX(-50%);display:flex;gap:17px;z-index:2}
+.candle{height:64px;width:12px;border-radius:5px;background:repeating-linear-gradient(135deg,#fff 0 6px,#f3a4c3 6px 12px);position:relative;box-shadow:0 0 0 1px #e9a4c1}
+.flame{position:absolute;top:-23px;left:1px;width:10px;height:20px;background:radial-gradient(ellipse at 50% 70%,#fff8b2 0 18%,#ffc65e 40%,#f28a42 75%,transparent 78%);border-radius:50% 50% 45% 45%;animation:flicker .14s infinite alternate;filter:drop-shadow(0 0 8px #ffbd55)}
+@keyframes flicker{to{transform:rotate(5deg) scale(.86);opacity:.8}}
+.candle.out .flame{display:none}
+.smoke{display:none;position:absolute;top:-30px;left:3px;color:#aaa;font-size:18px}
+.candle.out .smoke{display:block;animation:smoke 1.3s forwards}
+@keyframes smoke{to{transform:translateY(-22px);opacity:0}}
+.cut .tier{clip-path:polygon(0 0,100% 0,100% 100%,63% 100%,50% 63%,37% 100%,0 100%)}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:16px}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin:26px 0}
+.photo{background:#fff;padding:10px 10px 32px;box-shadow:0 12px 30px #8e53772a;transform:rotate(-2deg);border-radius:5px}
+.photo:nth-child(even){transform:rotate(2deg)}
+.photo img{display:block;width:100%;height:260px;object-fit:cover;border-radius:2px}
+.photo span{display:block;margin-top:10px;font:italic 14px Georgia;color:#a75e84}
+.letter{text-align:left;background:#fffafc;border:1px solid #f4d5e3;border-radius:20px;padding:clamp(18px,4vw,34px);line-height:1.85;font-size:16px}
+.letter p{font-size:16px;margin:0 0 14px}
+.signature{font-style:italic;color:#b75d8a;text-align:right;margin-top:20px}
+.final{background:linear-gradient(150deg,#fff0f7,#f4e4ff)}
+.final .panel{background:#fff9fce8}
+.flower{position:fixed;top:-40px;z-index:10;pointer-events:none;animation:fall linear forwards;font-size:22px;filter:drop-shadow(0 3px 5px #cc6b9833)}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#633c55;color:white;padding:11px 17px;border-radius:20px;font:13px Arial,sans-serif;z-index:30;opacity:0;transition:.25s;max-width:90vw;text-align:center}
+#toast.show{opacity:1}
+#musicPlayers{position:fixed;left:-10000px;top:0;width:200px;height:200px;overflow:hidden;pointer-events:none}
+@media(max-width:520px){.cake-area{transform:scale(.88);transform-origin:center bottom;margin-bottom:0}.photo img{height:230px}.panel{border-radius:24px}}
+</style>
+</head>
+<body>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="musicPlayers" aria-hidden="true">
+ <div id="musicPlayer" style="width:200px;height:200px"></div>
+</div>
+
+<section class="hero" id="start">
+ <div class="panel">
+  <div class="sparkle">✦ ✧ ♡ ✧ ✦</div>
+  <div class="eyebrow">a little surprise, made with love</div>
+  <h1>Hey, Jagriti!</h1>
+  <p class="script">Today is all about you… and there's a little birthday magic waiting.</p>
+  <div class="divider"></div>
+  <p>Ready for your surprise? 🎀</p>
+  <button class="btn" id="openBtn" onclick="openSurprise()">Open your surprise ✨</button>
+  <p class="small">Turn your phone volume up for the full experience ♡</p>
+ </div>
+</section>
+
+<section id="cake" class="hidden">
+ <div class="panel">
+  <div class="eyebrow">the sweetest moment</div>
+  <h2>Make a birthday wish 🎂</h2>
+  <p class="script">A cake made just for the birthday girl.</p>
+  <div class="cake-area">
+   <div class="candle-row" id="candles">
+    <div class="candle"><i class="flame"></i><i class="smoke">〰</i></div>
+    <div class="candle"><i class="flame"></i><i class="smoke">〰</i></div>
+    <div class="candle"><i class="flame"></i><i class="smoke">〰</i></div>
+   </div>
+   <div class="cake" id="cakeArt"><div class="tier"><div class="frost"></div><div class="berries">🍓 ✨ 🍓</div></div><div class="plate"></div></div>
+  </div>
+  <p id="cakeHint">Take a breath, make a wish, then blow towards your microphone. 💗</p>
+  <div class="actions">
+   <button class="btn" id="blowBtn" onclick="startAirBlow()">🌬️ Blow the candles</button>
+  </div>
+  <p class="small" id="micHint">Allow microphone access when your browser asks, then blow gently towards your phone or laptop microphone.</p>
+  <div class="actions hidden" id="cutActions">
+   <button class="btn" onclick="cutCake()">🍰 Cut the cake!</button>
+  </div>
+  <div class="hidden" id="cakeNext"><div class="divider"></div><p class="script">Yayyy! Happy birthday, Jagriti! 🥳</p><button class="btn" onclick="go('memories');flowerRain()">Celebrate & see your memories ♡</button></div>
+ </div>
+</section>
+
+<section id="memories" class="hidden">
+ <div class="panel">
+  <div class="eyebrow">little moments, lovely memories</div>
+  <h2>A few moments of you ✨</h2>
+  <p class="script">Some smiles deserve their own little gallery.</p>
+  <div class="photo-grid">
+   <div class="photo"><img src="assets/jagriti_01.jpg" alt="Jagriti smiling in a video memory"><span>That lovely smile ♡</span></div>
+   <div class="photo"><img src="assets/jagriti_02.jpg" alt="Another sweet moment of Jagriti"><span>Keep smiling, always 🎀</span></div>
+   <div class="photo"><img src="assets/jagriti_03.jpg" alt="Jagriti in a blue outfit"><span>Just being you ✨</span></div>
+  </div>
+  <div class="divider"></div>
+  <p>We've known each other for just a little while, but some people make a place in your day so naturally. You're one of those people. 💗</p>
+  <button class="btn" onclick="go('letter');playWishSong();flowerRain()">There's something I want to tell you 💌</button>
+ </div>
+</section>
+
+<section id="letter" class="hidden">
+ <div class="panel">
+  <div class="eyebrow">a little note from me to you</div>
+  <h2>Dear Jagriti, 💗</h2>
+  <div class="letter">
+   <p>Oyeee, happiest birthdayyy! ✨🎂🥳</p>
+   <p>I hope teri life mein tujhe woh sab kuch mile jo tu chahti hai. Tu hamesha khush rahe, haste rahe, aur tere face ki ye pyaari si smile kabhi kam na ho. 🎀</p>
+   <p>Baaki yaar, tu hai hi bohot cute — sirf looks se nahi, apne nature se bhi. Humein mile bas 1.5 mahina hua hai, lekin tere saath comfortable hone mein zyada time nahi laga. Tere saath baat karte hue bas mann karta hai ki time thoda aur ruk jaaye. Kabhi-kabhi topic khatam ho jaata hai, par baat karne ka mann nahi. 🥲🫶</p>
+   <p>Tera subah-subah call karke uthana sach mein bohot achha laga tha. Pata nahi kyun, par us din ek alag hi khushi hui thi. Aur tera first voice note… uff! Itna pyaara laga ki us din shayad 10–11 baar sun liya hoga. 😅💗</p>
+   <p>Video call wali baat bhi yaad hai. Main waise kisi se VC par itni baat nahi karta, ghar walon se bhi nahi, but tere saath pata hi nahi chala kaise itni naturally baat ho gayi. Maybe that's what makes you different. 👉👈</p>
+   <p>Sach mein yaar, tu ek gem hai. Teri smile, tera nature, teri hasi — sab kuch bohot pyaara hai. Aur haan, tera woh chhota sa mole… uski tareef ke liye toh words hi kam pad jaate hain. Bas tu hasti raha kar, because tujhe haste hue dekhna genuinely achha lagta hai. 😊</p>
+   <p>Kabhi-kabhi thodi jealousy bhi ho jaati hai, aur jab tune meri story lagane ke baare mein poocha tha na, I felt genuinely special. Thank you for making me feel that way. Shayad tujhe idea bhi nahi hai ki teri chhoti-chhoti baatein kisi ka din kitna achha bana sakti hain. ❣️</p>
+   <p>Thank you for every little thing — for the calls, the voice notes, the random talks, the smiles and the comfort. It may have been only 1.5 months, but these little moments have already become special to me.</p>
+   <p>I don't know what the future has planned, but I really hope life keeps giving us reasons to talk, laugh, make memories and stay in each other's lives. Some connections grow quietly, and I hope ours keeps becoming more beautiful with time. 🌷</p>
+   <p>Bas ek promise kar — apni smile kabhi mat khona, apne dreams ke peeche jaana, aur khud ko hamesha special samajhna. Because you really are. ✨</p>
+   <p>May this birthday bring you endless happiness, beautiful surprises, peaceful days and all the love you deserve. Happy birthday once again, Jagriti! 🥳💝</p>
+   <div class="signature">— Someone who's really glad to have met you ♡</div>
+  </div>
+  <div class="divider"></div>
+  <p class="script">For this little moment, just listen… 🎶</p>
+  <p>🌸 💗 ✨</p>
+  <button class="btn" onclick="go('final');flowerRain()">One last little surprise 🌷</button>
+ </div>
+</section>
+
+<section id="final" class="final hidden">
+ <div class="panel">
+  <div class="sparkle">♡ ✦ ♡ ✦ ♡</div>
+  <div class="eyebrow">one last thing</div>
+  <h2>Keep shining, Jagriti.</h2>
+  <p class="script">Some people make ordinary days feel a little more beautiful just by being in them.</p>
+  <div class="divider"></div>
+  <h1 style="font-size:clamp(34px,7vw,62px)">Happy Birthday! 🎂</h1>
+  <p>Stay happy. Stay silly. Stay wonderfully you. 💗</p>
+  <p style="font-size:30px">🌷 🦋 💞 🌸</p>
+  <button class="btn" onclick="heartRain();flowerRain()">Make it rain happiness ✨</button>
+  <p class="small">Made with lots of thought, just for you.</p>
+ </div>
+</section>
+
+<script>
+let audioCtx=null, ytPlayer=null, ytReady=false, queuedSong=null, micStream=null, micRAF=null;
+function go(id){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>e.classList.remove('show'),3600);}
+function getAudio(){const C=window.AudioContext||window.webkitAudioContext;if(!C)throw new Error('Audio is not supported in this browser');audioCtx=audioCtx||new C();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
+function tone(freq,dur,start,vol=.06){const a=getAudio(),o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,a.currentTime+start);g.gain.linearRampToValueAtTime(vol,a.currentTime+start+.025);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+start+dur);o.connect(g);g.connect(a.destination);o.start(a.currentTime+start);o.stop(a.currentTime+start+dur+.04);}
+function birthdayTune(){
+ // Familiar public-domain birthday melody played as a soft instrumental.
+ const seq=[[392,.35],[392,.18],[440,.55],[392,.55],[523,.55],[494,.9],
+ [392,.35],[392,.18],[440,.55],[392,.55],[587,.55],[523,.9],
+ [392,.35],[392,.18],[784,.55],[659,.55],[523,.55],[494,.55],[440,.9],
+ [698,.35],[698,.18],[659,.55],[523,.55],[587,.55],[523,1.0]];
+ let t=.05;seq.forEach(([f,d])=>{tone(f,d,t,.045);t+=d+.06;});
+}
+function openSurprise(){try{birthdayTune();}catch(e){}go('cake');flowerRain();document.getElementById('cakeHint').textContent="Make a wish, then blow gently towards your microphone. 💗";}
+function startAirBlow(){
+ const btn=document.getElementById('blowBtn'), hint=document.getElementById('micHint');
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('This browser does not provide microphone access. Open the published HTTPS link in Chrome or Safari.');return;}
+ btn.disabled=true;btn.textContent='🎤 Listening… blow gently';
+ hint.textContent='Microphone is on. Blow gently towards it for about one second.';
+ navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})
+ .then(stream=>{
+   micStream=stream;
+   const a=getAudio(),source=a.createMediaStreamSource(stream),an=a.createAnalyser();
+   an.fftSize=1024;an.smoothingTimeConstant=.18;source.connect(an);
+   const data=new Uint8Array(an.fftSize);let baseline=0,samples=0,blowFrames=0,started=performance.now(),calibrated=false;
+   const listen=()=>{
+     an.getByteTimeDomainData(data);let sum=0;
+     for(let i=0;i<data.length;i++){const v=(data[i]-128)/128;sum+=v*v;}
+     const rms=Math.sqrt(sum/data.length);
+     if(samples<18){baseline+=rms;samples++;if(samples===18){baseline/=18;calibrated=true;}}
+     else{
+       const threshold=Math.max(.075,baseline*2.15);
+       if(rms>threshold)blowFrames++;else blowFrames=Math.max(0,blowFrames-1);
+       if(blowFrames>=10){stopMic();candlesOut();return;}
+     }
+     if(performance.now()-started>12000){stopMic();btn.disabled=false;btn.textContent='🌬️ Try blowing again';hint.textContent='Didn’t catch the airflow. Move closer to the microphone and blow steadily, then try again.';toast('Try once more, a little closer to the microphone.');return;}
+     micRAF=requestAnimationFrame(listen);
+   };
+   listen();
+ }).catch(err=>{
+   btn.disabled=false;btn.textContent='🌬️ Blow the candles';
+   hint.textContent='Microphone permission is needed. Allow it in your browser settings, then tap again.';
+   toast('Please allow microphone access to blow out the candles.');
+ });
+}
+function stopMic(){if(micRAF)cancelAnimationFrame(micRAF);micRAF=null;if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;}}
+function candlesOut(){
+ document.querySelectorAll('.candle').forEach(c=>c.classList.add('out'));
+ document.getElementById('cakeHint').textContent='Wish made! ✨ Now it’s time to cut the cake.';
+ document.getElementById('blowBtn').classList.add('hidden');
+ document.getElementById('micHint').classList.add('hidden');
+ document.getElementById('cutActions').classList.remove('hidden');
+ playChime();heartRain();
+}
+function playChime(){[659,784,988].forEach((f,i)=>tone(f,.45,i*.13,.04));}
+function cutCake(){
+ document.getElementById('cakeArt').classList.add('cut');
+ document.getElementById('cakeHint').textContent='Cake cut! First slice for the birthday girl. 🍰';
+ document.getElementById('cutActions').classList.add('hidden');
+ document.getElementById('cakeNext').classList.remove('hidden');
+ stopSong();playSong('khaab');flowerRain();
+}
+function playSong(which){
+ if(!ytReady){queuedSong=which;return;}
+ const ids={khaab:'-N9-GPJ38PI',wish:'_KnEbpUXces'};
+ const id=ids[which];if(!id)return;
+ try{ytPlayer.loadVideoById({videoId:id,suggestedQuality:'small'});ytPlayer.setVolume(42);ytPlayer.playVideo();}catch(e){queuedSong=which;}
+}
+function stopSong(){try{if(ytPlayer&&ytReady)ytPlayer.stopVideo();}catch(e){}}
+function playLoveSong(){playSong('khaab');}
+function playWishSong(){playSong('wish');}
+function heartRain(){rain(['💗','💕','♡','💞','♥'],25);}
+function flowerRain(){rain(['🌸','🌷','✿','✨','🌼'],30);}
+function rain(items,count){for(let i=0;i<count;i++){const e=document.createElement('i');e.className='flower';e.textContent=items[i%items.length];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(4+Math.random()*4)+'s';e.style.animationDelay=(Math.random()*1.4)+'s';e.style.fontSize=(15+Math.random()*16)+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),9500);}}
+function onYouTubeIframeAPIReady(){
+ ytPlayer=new YT.Player('musicPlayer',{height:'200',width:'200',videoId:'_KnEbpUXces',
+  playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,playsinline:1,rel:0,iv_load_policy:3},
+  events:{onReady:()=>{ytReady=true;if(queuedSong){const q=queuedSong;queuedSong=null;playSong(q);}}}});
+}
+(function loadYT(){const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);})();
+window.addEventListener('pagehide',stopMic);
+</script>
+</body>
+</html>
