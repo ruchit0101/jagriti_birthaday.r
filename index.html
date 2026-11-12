@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,7 +8,8 @@
 <title>A Little Birthday Magic for Jagriti</title>
 <style>
 :root{--pink:#f28bb8;--rose:#bd6491;--ink:#633b55;--soft:#fff8fc}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{margin:0;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(circle at 20% 10%,#fff 0,#ffeaf3 40%,#f1e5ff 100%);overflow-x:hidden}
 button{font:inherit;cursor:pointer}
 section{min-height:100svh;display:grid;place-items:center;padding:30px 0;position:relative}
@@ -66,6 +68,7 @@ p{font-size:clamp(16px,2.4vw,19px);line-height:1.7}
 </style>
 </head>
 <body>
+
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="musicPlayers" aria-hidden="true">
  <div id="musicPlayer" style="width:200px;height:200px"></div>
@@ -95,7 +98,10 @@ p{font-size:clamp(16px,2.4vw,19px);line-height:1.7}
     <div class="candle"><i class="flame"></i><i class="smoke">〰</i></div>
     <div class="candle"><i class="flame"></i><i class="smoke">〰</i></div>
    </div>
-   <div class="cake" id="cakeArt"><div class="tier"><div class="frost"></div><div class="berries">🍓 ✨ 🍓</div></div><div class="plate"></div></div>
+   <div class="cake" id="cakeArt">
+    <div class="tier"><div class="frost"></div><div class="berries">🍓 ✨ 🍓</div></div>
+    <div class="plate"></div>
+   </div>
   </div>
   <p id="cakeHint">Take a breath, make a wish, then blow towards your microphone. 💗</p>
   <div class="actions">
@@ -105,7 +111,11 @@ p{font-size:clamp(16px,2.4vw,19px);line-height:1.7}
   <div class="actions hidden" id="cutActions">
    <button class="btn" onclick="cutCake()">🍰 Cut the cake!</button>
   </div>
-  <div class="hidden" id="cakeNext"><div class="divider"></div><p class="script">Yayyy! Happy birthday, Jagriti! 🥳</p><button class="btn" onclick="go('memories');flowerRain()">Celebrate & see your memories ♡</button></div>
+  <div class="hidden" id="cakeNext">
+   <div class="divider"></div>
+   <p class="script">Yayyy! Happy birthday, Jagriti! 🥳</p>
+   <button class="btn" onclick="go('memories');flowerRain()">Celebrate & see your memories ♡</button>
+  </div>
  </div>
 </section>
 
@@ -115,9 +125,9 @@ p{font-size:clamp(16px,2.4vw,19px);line-height:1.7}
   <h2>A few moments of you ✨</h2>
   <p class="script">Some smiles deserve their own little gallery.</p>
   <div class="photo-grid">
-   <div class="photo"><img src="assets/jagriti_01.jpg" alt="Jagriti smiling in a video memory"><span>That lovely smile ♡</span></div>
-   <div class="photo"><img src="assets/jagriti_02.jpg" alt="Another sweet moment of Jagriti"><span>Keep smiling, always 🎀</span></div>
-   <div class="photo"><img src="assets/jagriti_03.jpg" alt="Jagriti in a blue outfit"><span>Just being you ✨</span></div>
+   <div class="photo"><img src="jagriti_01.jpg" alt="Jagriti smiling in a video memory"><span>That lovely smile ♡</span></div>
+   <div class="photo"><img src="jagriti_02.jpg" alt="Another sweet moment of Jagriti"><span>Keep smiling, always 🎀</span></div>
+   <div class="photo"><img src="jagriti_03.jpg" alt="Jagriti in a blue outfit"><span>Just being you ✨</span></div>
   </div>
   <div class="divider"></div>
   <p>We've known each other for just a little while, but some people make a place in your day so naturally. You're one of those people. 💗</p>
@@ -167,85 +177,249 @@ p{font-size:clamp(16px,2.4vw,19px);line-height:1.7}
 
 <script>
 let audioCtx=null, ytPlayer=null, ytReady=false, queuedSong=null, micStream=null, micRAF=null;
-function go(id){document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});}
-function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>e.classList.remove('show'),3600);}
-function getAudio(){const C=window.AudioContext||window.webkitAudioContext;if(!C)throw new Error('Audio is not supported in this browser');audioCtx=audioCtx||new C();if(audioCtx.state==='suspended')audioCtx.resume();return audioCtx;}
-function tone(freq,dur,start,vol=.06){const a=getAudio(),o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=freq;g.gain.setValueAtTime(.0001,a.currentTime+start);g.gain.linearRampToValueAtTime(vol,a.currentTime+start+.025);g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+start+dur);o.connect(g);g.connect(a.destination);o.start(a.currentTime+start);o.stop(a.currentTime+start+dur+.04);}
+
+function go(id){
+ document.querySelectorAll('section').forEach(s=>s.classList.add('hidden'));
+ document.getElementById(id).classList.remove('hidden');
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toast(t){
+ const e=document.getElementById('toast');
+ e.textContent=t;
+ e.classList.add('show');
+ clearTimeout(window.toastTimer);
+ window.toastTimer=setTimeout(()=>e.classList.remove('show'),3600);
+}
+
+function getAudio(){
+ const C=window.AudioContext||window.webkitAudioContext;
+ if(!C)throw new Error('Audio is not supported in this browser');
+ audioCtx=audioCtx||new C();
+ if(audioCtx.state==='suspended')audioCtx.resume();
+ return audioCtx;
+}
+
+function tone(freq,dur,start,vol=.06){
+ const a=getAudio(),o=a.createOscillator(),g=a.createGain();
+ o.type='sine';
+ o.frequency.value=freq;
+ g.gain.setValueAtTime(.0001,a.currentTime+start);
+ g.gain.linearRampToValueAtTime(vol,a.currentTime+start+.025);
+ g.gain.exponentialRampToValueAtTime(.0001,a.currentTime+start+dur);
+ o.connect(g);
+ g.connect(a.destination);
+ o.start(a.currentTime+start);
+ o.stop(a.currentTime+start+dur+.04);
+}
+
 function birthdayTune(){
- // Familiar public-domain birthday melody played as a soft instrumental.
  const seq=[[392,.35],[392,.18],[440,.55],[392,.55],[523,.55],[494,.9],
  [392,.35],[392,.18],[440,.55],[392,.55],[587,.55],[523,.9],
  [392,.35],[392,.18],[784,.55],[659,.55],[523,.55],[494,.55],[440,.9],
  [698,.35],[698,.18],[659,.55],[523,.55],[587,.55],[523,1.0]];
- let t=.05;seq.forEach(([f,d])=>{tone(f,d,t,.045);t+=d+.06;});
+ let t=.05;
+ seq.forEach(([f,d])=>{tone(f,d,t,.045);t+=d+.06;});
 }
-function openSurprise(){try{birthdayTune();}catch(e){}go('cake');flowerRain();document.getElementById('cakeHint').textContent="Make a wish, then blow gently towards your microphone. 💗";}
+
+function openSurprise(){
+ try{birthdayTune();}catch(e){}
+ go('cake');
+ flowerRain();
+ document.getElementById('cakeHint').textContent="Make a wish, then blow gently towards your microphone. 💗";
+}
+
 function startAirBlow(){
- const btn=document.getElementById('blowBtn'), hint=document.getElementById('micHint');
- if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){toast('This browser does not provide microphone access. Open the published HTTPS link in Chrome or Safari.');return;}
- btn.disabled=true;btn.textContent='🎤 Listening… blow gently';
+ const btn=document.getElementById('blowBtn');
+ const hint=document.getElementById('micHint');
+
+ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+  toast('This browser does not provide microphone access. Open the published HTTPS link in Chrome or Safari.');
+  return;
+ }
+
+ btn.disabled=true;
+ btn.textContent='🎤 Listening… blow gently';
  hint.textContent='Microphone is on. Blow gently towards it for about one second.';
- navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})
+
+ navigator.mediaDevices.getUserMedia({
+  audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}
+ })
  .then(stream=>{
-   micStream=stream;
-   const a=getAudio(),source=a.createMediaStreamSource(stream),an=a.createAnalyser();
-   an.fftSize=1024;an.smoothingTimeConstant=.18;source.connect(an);
-   const data=new Uint8Array(an.fftSize);let baseline=0,samples=0,blowFrames=0,started=performance.now(),calibrated=false;
-   const listen=()=>{
-     an.getByteTimeDomainData(data);let sum=0;
-     for(let i=0;i<data.length;i++){const v=(data[i]-128)/128;sum+=v*v;}
-     const rms=Math.sqrt(sum/data.length);
-     if(samples<18){baseline+=rms;samples++;if(samples===18){baseline/=18;calibrated=true;}}
-     else{
-       const threshold=Math.max(.075,baseline*2.15);
-       if(rms>threshold)blowFrames++;else blowFrames=Math.max(0,blowFrames-1);
-       if(blowFrames>=10){stopMic();candlesOut();return;}
-     }
-     if(performance.now()-started>12000){stopMic();btn.disabled=false;btn.textContent='🌬️ Try blowing again';hint.textContent='Didn’t catch the airflow. Move closer to the microphone and blow steadily, then try again.';toast('Try once more, a little closer to the microphone.');return;}
-     micRAF=requestAnimationFrame(listen);
-   };
-   listen();
- }).catch(err=>{
-   btn.disabled=false;btn.textContent='🌬️ Blow the candles';
-   hint.textContent='Microphone permission is needed. Allow it in your browser settings, then tap again.';
-   toast('Please allow microphone access to blow out the candles.');
+  micStream=stream;
+  const a=getAudio();
+  const source=a.createMediaStreamSource(stream);
+  const an=a.createAnalyser();
+  an.fftSize=1024;
+  an.smoothingTimeConstant=.18;
+  source.connect(an);
+
+  const data=new Uint8Array(an.fftSize);
+  let baseline=0,samples=0,blowFrames=0,started=performance.now();
+
+  const listen=()=>{
+   an.getByteTimeDomainData(data);
+   let sum=0;
+   for(let i=0;i<data.length;i++){
+    const v=(data[i]-128)/128;
+    sum+=v*v;
+   }
+   const rms=Math.sqrt(sum/data.length);
+
+   if(samples<18){
+    baseline+=rms;
+    samples++;
+    if(samples===18)baseline/=18;
+   }else{
+    const threshold=Math.max(.075,baseline*2.15);
+    if(rms>threshold)blowFrames++;
+    else blowFrames=Math.max(0,blowFrames-1);
+
+    if(blowFrames>=10){
+     stopMic();
+     candlesOut();
+     return;
+    }
+   }
+
+   if(performance.now()-started>12000){
+    stopMic();
+    btn.disabled=false;
+    btn.textContent='🌬️ Try blowing again';
+    hint.textContent='Didn’t catch the airflow. Move closer to the microphone and blow steadily, then try again.';
+    toast('Try once more, a little closer to the microphone.');
+    return;
+   }
+   micRAF=requestAnimationFrame(listen);
+  };
+  listen();
+ })
+ .catch(err=>{
+  btn.disabled=false;
+  btn.textContent='🌬️ Blow the candles';
+  hint.textContent='Microphone permission is needed. Allow it in your browser settings, then tap again.';
+  toast('Please allow microphone access to blow out the candles.');
  });
 }
-function stopMic(){if(micRAF)cancelAnimationFrame(micRAF);micRAF=null;if(micStream){micStream.getTracks().forEach(t=>t.stop());micStream=null;}}
+
+function stopMic(){
+ if(micRAF)cancelAnimationFrame(micRAF);
+ micRAF=null;
+ if(micStream){
+  micStream.getTracks().forEach(t=>t.stop());
+  micStream=null;
+ }
+}
+
 function candlesOut(){
  document.querySelectorAll('.candle').forEach(c=>c.classList.add('out'));
  document.getElementById('cakeHint').textContent='Wish made! ✨ Now it’s time to cut the cake.';
  document.getElementById('blowBtn').classList.add('hidden');
  document.getElementById('micHint').classList.add('hidden');
  document.getElementById('cutActions').classList.remove('hidden');
- playChime();heartRain();
+ playChime();
+ heartRain();
 }
-function playChime(){[659,784,988].forEach((f,i)=>tone(f,.45,i*.13,.04));}
+
+function playChime(){
+ [659,784,988].forEach((f,i)=>tone(f,.45,i*.13,.04));
+}
+
 function cutCake(){
  document.getElementById('cakeArt').classList.add('cut');
  document.getElementById('cakeHint').textContent='Cake cut! First slice for the birthday girl. 🍰';
  document.getElementById('cutActions').classList.add('hidden');
  document.getElementById('cakeNext').classList.remove('hidden');
- stopSong();playSong('khaab');flowerRain();
+ stopSong();
+ playSong('khaab');
+ flowerRain();
 }
+
 function playSong(which){
- if(!ytReady){queuedSong=which;return;}
- const ids={khaab:'-N9-GPJ38PI',wish:'_KnEbpUXces'};
- const id=ids[which];if(!id)return;
- try{ytPlayer.loadVideoById({videoId:id,suggestedQuality:'small'});ytPlayer.setVolume(42);ytPlayer.playVideo();}catch(e){queuedSong=which;}
+ if(!ytReady){
+  queuedSong=which;
+  return;
+ }
+
+ const ids={
+  khaab:'-N9-GPJ38PI',
+  wish:'_KnEbpUXces'
+ };
+ const id=ids[which];
+ if(!id)return;
+
+ try{
+  // Start the requested remastered song around the "Yes, yes, I love you" section.
+  ytPlayer.loadVideoById({
+   videoId:id,
+   startSeconds:(which==='wish'?135:0),
+   suggestedQuality:'small'
+  });
+  ytPlayer.setVolume(42);
+  ytPlayer.playVideo();
+ }catch(e){
+  queuedSong=which;
+ }
 }
-function stopSong(){try{if(ytPlayer&&ytReady)ytPlayer.stopVideo();}catch(e){}}
-function playLoveSong(){playSong('khaab');}
+
+function stopSong(){
+ try{
+  if(ytPlayer&&ytReady)ytPlayer.stopVideo();
+ }catch(e){}
+}
+
 function playWishSong(){playSong('wish');}
+
 function heartRain(){rain(['💗','💕','♡','💞','♥'],25);}
 function flowerRain(){rain(['🌸','🌷','✿','✨','🌼'],30);}
-function rain(items,count){for(let i=0;i<count;i++){const e=document.createElement('i');e.className='flower';e.textContent=items[i%items.length];e.style.left=Math.random()*100+'vw';e.style.animationDuration=(4+Math.random()*4)+'s';e.style.animationDelay=(Math.random()*1.4)+'s';e.style.fontSize=(15+Math.random()*16)+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),9500);}}
-function onYouTubeIframeAPIReady(){
- ytPlayer=new YT.Player('musicPlayer',{height:'200',width:'200',videoId:'_KnEbpUXces',
-  playerVars:{autoplay:0,controls:0,disablekb:1,fs:0,playsinline:1,rel:0,iv_load_policy:3},
-  events:{onReady:()=>{ytReady=true;if(queuedSong){const q=queuedSong;queuedSong=null;playSong(q);}}}});
+
+function rain(items,count){
+ for(let i=0;i<count;i++){
+  const e=document.createElement('i');
+  e.className='flower';
+  e.textContent=items[i%items.length];
+  e.style.left=Math.random()*100+'vw';
+  e.style.animationDuration=(4+Math.random()*4)+'s';
+  e.style.animationDelay=(Math.random()*1.4)+'s';
+  e.style.fontSize=(15+Math.random()*16)+'px';
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),9500);
+ }
 }
-(function loadYT(){const s=document.createElement('script');s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s);})();
+
+function onYouTubeIframeAPIReady(){
+ ytPlayer=new YT.Player('musicPlayer',{
+  height:'200',
+  width:'200',
+  videoId:'_KnEbpUXces',
+  playerVars:{
+   autoplay:0,
+   controls:0,
+   disablekb:1,
+   fs:0,
+   playsinline:1,
+   rel:0,
+   iv_load_policy:3
+  },
+  events:{
+   onReady:()=>{
+    ytReady=true;
+    if(queuedSong){
+     const q=queuedSong;
+     queuedSong=null;
+     playSong(q);
+    }
+   }
+  }
+ });
+}
+
+(function loadYT(){
+ const s=document.createElement('script');
+ s.src='https://www.youtube.com/iframe_api';
+ document.head.appendChild(s);
+})();
+
 window.addEventListener('pagehide',stopMic);
 </script>
 </body>
